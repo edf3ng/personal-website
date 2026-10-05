@@ -1,0 +1,49 @@
+---
+title: "Arcade Portfolio"
+date: 2026-09-30
+tags: [Next.js, React Three Fiber, WebGL, MDX]
+summary: "This site. A persistent 3D arcade room where navigating is a camera move and the content is a CRT-styled DOM layer."
+status: shipped
+featured: true
+badge: "ARC"
+repo: "https://github.com/edwinfeng/personal-website"
+draft: false
+---
+
+Five cabinets stand in an arc. Clicking one pushes a route, the camera flies to
+it, and the page content powers on as a CRT overlay. The scene never unmounts.
+
+## How it fits together
+
+A single `<Canvas>` lives in the root layout, above the router. A small client
+component watches the pathname and writes the resolved station into a Zustand
+store; the camera rig reads that store and damps toward the matching pose every
+frame.
+
+```ts
+easing.damp3(base.current, targetPos.current, 0.55, dt);
+easing.damp3(look.current, targetLook.current, 0.55, dt);
+state.camera.position.copy(base.current).add(parallax.current);
+state.camera.lookAt(look.current);
+```
+
+Pointer parallax is damped separately so a twitching mouse never convinces the
+rig it has not arrived yet.
+
+## The room is procedural
+
+There is no GLB. The cabinet is a 2D side profile extruded along its width,
+with the marquee, control panel, and coin door placed against named dimensions
+from the same constants object. The carpet is drawn to a canvas at startup.
+
+<Callout type="note" title="Why no model">
+Shipping no binary assets means the initial 3D payload is shader source and a
+few hundred lines of geometry. It also means changing the cabinet silhouette is
+editing an array of coordinates.
+</Callout>
+
+## What I would change
+
+The attract-mode screens are shader patterns rather than real previews. That
+was the right call for performance, but there is a version of this where the
+projects cabinet shows actual screenshots scrolling by, and I want it.

@@ -1,0 +1,43 @@
+---
+title: "Frame budgets are a design tool"
+date: 2026-08-14
+tags: [performance, process]
+summary: "Treating 16.6 ms as a spec rather than a stretch goal changes what you are willing to put on screen."
+draft: false
+---
+
+A frame budget is usually introduced as a constraint you apologise for. It is
+more useful as a design brief.
+
+## Start from the budget, not the design
+
+If you decide up front that a scene gets 8 ms of GPU time on a four-year-old
+laptop, the question stops being "can we afford a reflective floor" and becomes
+"what is the best thing we can buy with 2 ms." That reframing kills a lot of
+arguments before they start.
+
+## Measure the device you do not own
+
+The devices that matter are the ones you do not have on your desk. Three
+proxies get you most of the way:
+
+- `navigator.hardwareConcurrency` for rough CPU class
+- `navigator.deviceMemory` for whether textures will thrash
+- the unmasked `RENDERER` string for the software-rasteriser case
+
+None of them are precise. Together they are enough to pick a starting tier, and
+a runtime monitor fixes the guess within a few seconds.
+
+## Degrade in the right order
+
+Things worth cutting, cheapest effect on perceived quality first:
+
+1. Multisampling. Bloom hides the edges anyway.
+2. Realtime shadows. Bake once and freeze the map.
+3. Screen-space reflections or reflective floors.
+4. Post-processing, all of it.
+5. Geometry and particle counts.
+
+Resolution comes last. Dropping device pixel ratio is the most visible cut you
+can make, so it should be the one you reach for only when everything else is
+already gone.
