@@ -22,29 +22,18 @@ export default function AboutPage() {
     <WindowFrame title="About Me" icon="/desktop/icons/user.svg" width={540}>
       <p className="os-kicker">About</p>
       <h1>{site.name}</h1>
-      <p>{resume.summary}</p>
+      <p>
+        Hi, I'm Edwin! I'm a freshman at UT Austin studying Computer Science and Business.
+        I'm interested in the intersection of technology and business, and I'm always looking for new
+        opportunities to learn and grow.
+      </p>
 
       <h2>Background</h2>
       <p>
-        I grew up in Austin, finished at Liberal Arts and Science Academy (rank
-        3/400), and started at UT in 2026. Most of my work sits where data
-        meets a system you can actually run: hydrophone spectra, satellite
-        soil maps, RAG chatbots, and the evaluation that keeps them honest.
+        I was born and raised in Austin, graduating from the Liberal Arts and Science Academy.
+        I love the outdoors, and I'm a big fan of the Texas Longhorns. I also love watching
+        Valorant esports!
       </p>
-      <p>
-        This site is the desk I keep at night. Rain on the glass, folders on
-        the right, windows for anything worth opening.
-      </p>
-
-      <h2>Currently</h2>
-      <ul className="rows">
-        {NOW.map((item) => (
-          <li key={item.label}>
-            <span className="label">{item.label}</span>
-            <span>{item.value}</span>
-          </li>
-        ))}
-      </ul>
 
       <h2>Contact</h2>
       <ul className="contact-row">

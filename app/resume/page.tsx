@@ -32,11 +32,13 @@ function EntryList({ entries }: { entries: readonly ResumeEntry[] }) {
             )}
             {entry.location ? ` · ${entry.location}` : null}
           </p>
-          <ul>
-            {entry.points.map((point) => (
-              <li key={point}>{point}</li>
-            ))}
-          </ul>
+          {entry.points.length > 0 ? (
+            <ul>
+              {entry.points.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
+          ) : null}
         </article>
       ))}
     </div>
@@ -48,13 +50,12 @@ export default function ResumePage() {
     <WindowFrame
       title="Resume"
       icon="/desktop/icons/resume.svg"
-      width={620}
+      width={640}
       actions={<PrintButton />}
     >
-      <div className="print-plain">
-        <p className="os-kicker">Resume</p>
-        <h1>{resume.headline}</h1>
-        <p>{resume.summary}</p>
+      <div className="print-plain resume-doc">
+        <h1>Resume</h1>
+        <p className="resume-bio">{resume.summary}</p>
         <ul className="contact-row">
           {resume.contact.map((item) => (
             <li key={item.label}>
@@ -63,32 +64,26 @@ export default function ResumePage() {
           ))}
         </ul>
 
-        <h2>Experience</h2>
-        <EntryList entries={resume.experience} />
+        <section className="resume-section">
+          <h2>Experience</h2>
+          <EntryList entries={resume.experience} />
+        </section>
 
         {resume.education.length > 0 ? (
-          <>
+          <section className="resume-section">
             <h2>Education</h2>
             <EntryList entries={resume.education} />
-          </>
+          </section>
         ) : null}
 
-        <h2>Honors</h2>
-        <ul className="honor-list">
-          {resume.honors.map((honor) => (
-            <li key={honor.title}>
-              <span className="job-dates">{honor.date}</span>
-              <span>{honor.title}</span>
-            </li>
+        <section className="resume-section">
+          <h2>Skills</h2>
+          {resume.skills.map((group) => (
+            <p key={group.group} className="resume-skill">
+              <strong>{group.group}.</strong> {group.items.join(", ")}
+            </p>
           ))}
-        </ul>
-
-        <h2>Skills</h2>
-        {resume.skills.map((group) => (
-          <p key={group.group}>
-            <strong>{group.group}.</strong> {group.items.join(", ")}
-          </p>
-        ))}
+        </section>
       </div>
     </WindowFrame>
   );

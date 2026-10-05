@@ -13,7 +13,7 @@ export type ResumeEntry = {
 export const resume = {
   headline: "Computer Science & Business Honors, UT Austin",
   summary:
-    "CS Honors and Canfield Business Honors student at The University of Texas at Austin. I work on research and systems: ocean acoustics, remote sensing, retrieval, and models that have to hold up under real data.",
+    "CS Honors and Canfield Business Honors student at The University of Texas at Austin. Passionate about modeling systems and full-stack development.",
   contact: [
     { label: "Email", value: site.email, href: `mailto:${site.email}` },
     { label: "Phone", value: site.phone, href: `tel:${site.phone.replaceAll("-", "")}` },
@@ -30,9 +30,8 @@ export const resume = {
       location: "Austin, Texas",
       url: "https://www.arlut.utexas.edu/",
       points: [
-        "Developed a nonlinear model correlating ocean acoustic noise level with surface wind speed at ultra-low frequency (ULF).",
-        "Applied FFT spectral analysis to hydrophone data to optimize the resolution tradeoff.",
-        "Designed a power sum of two wind-noise models to reconstruct parabolic correlations observed at lower frequencies.",
+        "Modeled ULF ocean noise against wind speed and ran FFT analysis on hydrophone data.",
+        "Combined two wind-noise models to reconstruct lower-frequency correlations.",
       ],
     },
     {
@@ -43,9 +42,8 @@ export const resume = {
       location: "Austin, Texas",
       url: "https://www.csr.utexas.edu/",
       points: [
-        "Predicted soil acidification risk from ammonium and meteorological inputs in Riverside County.",
-        "Used a CNN encoder–decoder and Attention U-Net variants, raising R² 55.7% over baseline.",
-        "First-author paper accepted to the 2025 MIT Undergraduate Research Technology Conference; published on IEEE Xplore.",
+        "Predicted soil acidification risk with CNN and Attention U-Net models, raising R² 55.7% over baseline.",
+        "First-author paper at MIT URTC 2025, published on IEEE Xplore.",
       ],
     },
     {
@@ -56,9 +54,8 @@ export const resume = {
       location: "Fargo, North Dakota (remote)",
       url: "https://www.ndsu.edu/",
       points: [
-        "Ran a comparative analysis of a custom chatbot on a RAG pipeline with an embedding vector database.",
-        "Designed a multi-agent system that improved response efficiency and increased retrieval coverage 72%.",
-        "Led a user study at the University of Washington, integrating the system with cybersecurity education platforms.",
+        "Built a RAG chatbot and multi-agent system that raised retrieval coverage 72%.",
+        "Led a University of Washington user study with cybersecurity education platforms.",
       ],
     },
   ] satisfies ResumeEntry[],
@@ -72,7 +69,7 @@ export const resume = {
       location: "Austin, Texas",
       url: "https://www.utexas.edu/",
       points: [
-        "Dual degree: Computer Science Honors and Canfield Business Honors.",
+        "Coursework: Data Structures, Discrete Math.",
       ],
     },
     {
@@ -80,10 +77,8 @@ export const resume = {
       role: "High School",
       start: "",
       end: "Jun 2026",
-      location: "Austin, Texas · Rank 3/400",
-      points: [
-        "Coursework: Advanced CS, Web & Mobile Applications, AP CS A, Linear Algebra, Multivariable Calculus, AP Calculus BC, AP Physics 1 & 2, Data Structures (H), Discrete Math (H).",
-      ],
+      location: "Austin, Texas",
+      points: [],
     },
   ] satisfies ResumeEntry[],
 

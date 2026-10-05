@@ -15,7 +15,6 @@
   --title: #f3e6d0;
   --select: #c4784a;
   --sticky: #e8c4a0;
-  --rain: rgb(210 228 240 / 0.22);
   --link: #8b4e2c;
   color-scheme: dark;
 }
@@ -146,14 +145,16 @@ body {
 
 .wallpaper {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  top: 50%;
+  left: 50%;
+  width: 132%;
+  height: 132%;
   object-fit: cover;
-  object-position: center 40%;
+  object-position: center 55%;
   pointer-events: none;
   user-select: none;
-  filter: saturate(1.05) contrast(1.05);
+  filter: saturate(1.08) contrast(1.04) brightness(0.92);
+  animation: city-drift 48s ease-in-out infinite alternate;
 }
 
 .night-veil {
@@ -162,59 +163,113 @@ body {
   z-index: 1;
   pointer-events: none;
   background:
-    radial-gradient(120% 80% at 50% 100%, rgb(8 10 18 / 0.15), rgb(6 8 14 / 0.45)),
-    linear-gradient(to top, rgb(8 10 18 / 0.35), transparent 40%);
+    radial-gradient(90% 70% at 50% 80%, rgb(8 10 18 / 0.08), rgb(6 8 14 / 0.38)),
+    linear-gradient(to top, rgb(8 10 18 / 0.4), transparent 45%);
 }
 
-.rain,
-.rain::before,
-.rain::after {
+.bokeh {
   position: absolute;
   inset: 0;
-  pointer-events: none;
-}
-
-.rain {
-  overflow: hidden;
   z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
 }
 
-.rain::before,
-.rain::after {
-  content: "";
-  background-image: repeating-linear-gradient(
-    175deg,
-    transparent 0 14px,
-    var(--rain) 14px 15px,
-    transparent 15px 28px
-  );
-  animation: rain-fall 0.55s linear infinite;
+.bokeh span {
+  position: absolute;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  filter: blur(0.5px);
+  animation: bokeh-float 20s ease-in-out infinite;
 }
 
-.rain::after {
-  opacity: 0.55;
-  background-image: repeating-linear-gradient(
-    168deg,
-    transparent 0 22px,
-    rgb(230 240 248 / 0.16) 22px 23px,
-    transparent 23px 48px
-  );
-  animation-duration: 0.9s;
+.bokeh span:nth-child(1) {
+  width: 14px;
+  height: 14px;
+  left: 14%;
+  top: 72%;
+  background: #ffb36a;
+  animation-duration: 22s;
+}
+.bokeh span:nth-child(2) {
+  width: 9px;
+  height: 9px;
+  left: 28%;
+  top: 64%;
+  background: #7ec8ff;
+  animation-duration: 18s;
+  animation-delay: -4s;
+}
+.bokeh span:nth-child(3) {
+  width: 22px;
+  height: 22px;
+  left: 62%;
+  top: 58%;
+  background: #ff8a5c;
+  opacity: 0.45;
+  animation-duration: 26s;
+  animation-delay: -8s;
+}
+.bokeh span:nth-child(4) {
+  width: 11px;
+  height: 11px;
+  left: 78%;
+  top: 70%;
+  background: #ffe08a;
+  animation-duration: 16s;
+  animation-delay: -2s;
+}
+.bokeh span:nth-child(5) {
+  width: 7px;
+  height: 7px;
+  left: 46%;
+  top: 76%;
+  background: #9ad7ff;
+  animation-duration: 14s;
+  animation-delay: -6s;
+}
+.bokeh span:nth-child(6) {
+  width: 16px;
+  height: 16px;
+  left: 38%;
+  top: 82%;
+  background: #ff6b6b;
+  animation-duration: 24s;
+  animation-delay: -10s;
 }
 
-@keyframes rain-fall {
+@keyframes city-drift {
   from {
-    transform: translateY(-40px);
+    transform: translate(-52%, -51%) scale(1.02);
   }
   to {
-    transform: translateY(40px);
+    transform: translate(-48%, -48.5%) scale(1.07);
+  }
+}
+
+@keyframes bokeh-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.28;
+  }
+  50% {
+    transform: translate3d(10px, -22px, 0) scale(1.2);
+    opacity: 0.5;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .rain::before,
-  .rain::after {
+  .wallpaper,
+  .bokeh span {
     animation: none;
+  }
+  .wallpaper {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: none;
   }
 }
 
@@ -537,6 +592,49 @@ body {
   font-size: 15px;
 }
 
+.resume-doc > h1 {
+  margin: 0 0 10px;
+  font-size: 44px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.resume-bio {
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+.resume-section {
+  margin: 1.6em 0 0;
+  padding: 0 0 0 1rem;
+  border-left: 2px solid #d4c4ae;
+}
+
+.resume-section > h2 {
+  margin: 0 0 0.75em;
+  font-size: 1.28em;
+  font-family: var(--font-doc), Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: var(--ink);
+}
+
+.resume-section .job-head h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.resume-section .job:last-child {
+  margin-bottom: 0;
+}
+
+.resume-skill {
+  margin: 0 0 0.45em;
+  font-size: 15px;
+}
+
 .contact-row {
   display: flex;
   flex-wrap: wrap;
@@ -694,8 +792,8 @@ body {
   .desk-icons,
   .sticky,
   .os-titlebar,
-  .rain,
-  .night-veil {
+  .night-veil,
+  .bokeh {
     display: none !important;
   }
   body {
