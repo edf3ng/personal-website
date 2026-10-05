@@ -1,0 +1,29 @@
+---
+title: "SciOlyQ"
+date: 2026-07-15
+tags: [Python, pdfplumber, scikit-learn, SQLite]
+summary: "A Science Olympiad exam parser and retrieval engine that aligned 99.7% of extracted questions to official answer keys."
+status: shipped
+featured: false
+badge: "Q"
+draft: false
+---
+
+Science Olympiad exams do not share a layout. SciOlyQ is a PDF parsing
+pipeline that pulls questions out of whatever format the set arrived in,
+then retrieves related items for study.
+
+## Parsing
+
+pdfplumber walks each packet. Extracted stems are aligned to official
+answer keys at 99.7% on the labeled set.
+
+## Retrieval
+
+Hybrid BM25 and dense retrieval, fused by rank. Relevance labels were
+derived at zero labeling cost from the key alignment, so the eval set
+did not need a separate annotation pass.
+
+## Stack
+
+Python, pdfplumber, scikit-learn, SQLite.

@@ -1,16 +1,16 @@
 export const site = {
   name: "Edwin Feng",
-  handle: "edwinfeng",
+  handle: "edf3ng",
   title: "Edwin Feng",
   description:
-    "The personal site of Edwin Feng — projects, notes, and a resume, set in a 3D arcade.",
+    "CS and Business Honors student at UT Austin. Research, systems, and a rainy-night desktop.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://edwinfeng.dev",
   locale: "en_US",
-  email: "hello@edwinfeng.dev",
+  email: "edwin.c.feng@gmail.com",
+  phone: "512-998-9710",
   links: {
-    github: "https://github.com/edwinfeng",
-    linkedin: "https://linkedin.com/in/edwinfeng",
-    x: "https://x.com/edwinfeng",
+    github: "https://github.com/edf3ng",
+    linkedin: "https://linkedin.com/in/edwin-feng",
   },
 } as const;
 

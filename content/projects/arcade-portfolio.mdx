@@ -1,49 +1,28 @@
 ---
-title: "Arcade Portfolio"
-date: 2026-09-30
-tags: [Next.js, React Three Fiber, WebGL, MDX]
-summary: "This site. A persistent 3D arcade room where navigating is a camera move and the content is a CRT-styled DOM layer."
+title: "This rainy desktop"
+date: 2026-10-05
+tags: [Next.js, CSS]
+summary: "This site. A night desk looking out on a wet city, where folders are pages and files open in windows."
 status: shipped
 featured: true
-badge: "ARC"
-repo: "https://github.com/edwinfeng/personal-website"
+badge: "OS"
+repo: "https://github.com/edf3ng/personal-website"
 draft: false
 ---
 
-Five cabinets stand in an arc. Clicking one pushes a route, the camera flies to
-it, and the page content powers on as a CRT overlay. The scene never unmounts.
+You sit down after dark. Chicago rain on the glass, a warm window in the
+middle of the screen. The folders on the right are the whole site.
 
 ## How it fits together
 
-A single `<Canvas>` lives in the root layout, above the router. A small client
-component watches the pathname and writes the resolved station into a Zustand
-store; the camera rig reads that store and damps toward the matching pose every
-frame.
+The desktop lives in the root layout. Routing only changes which window is
+open. Close it and you are back at the rain.
 
-```ts
-easing.damp3(base.current, targetPos.current, 0.55, dt);
-easing.damp3(look.current, targetLook.current, 0.55, dt);
-state.camera.position.copy(base.current).add(parallax.current);
-state.camera.lookAt(look.current);
-```
+Icons come from the Tango Desktop Project. The wallpaper is a 2008 photograph
+by Daniel Powell, used under CC BY 2.0. Nunito and Lora keep the chrome
+soft instead of corporate.
 
-Pointer parallax is damped separately so a twitching mouse never convinces the
-rig it has not arrived yet.
+## The desktop is the nav
 
-## The room is procedural
-
-There is no GLB. The cabinet is a 2D side profile extruded along its width,
-with the marquee, control panel, and coin door placed against named dimensions
-from the same constants object. The carpet is drawn to a canvas at startup.
-
-<Callout type="note" title="Why no model">
-Shipping no binary assets means the initial 3D payload is shader source and a
-few hundred lines of geometry. It also means changing the cabinet silhouette is
-editing an array of coordinates.
-</Callout>
-
-## What I would change
-
-The attract-mode screens are shader patterns rather than real previews. That
-was the right call for performance, but there is a version of this where the
-projects cabinet shows actual screenshots scrolling by, and I want it.
+There is no header of links. About, projects, notes, and resume are icons.
+Click one and a window appears. Drag it if you want it out of the way.

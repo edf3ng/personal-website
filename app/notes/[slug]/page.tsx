@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { Mdx } from "@/components/overlay/Mdx";
-import { OverlayShell } from "@/components/overlay/OverlayShell";
+import { WindowFrame } from "@/components/desktop/WindowFrame";
+import { Mdx } from "@/components/mdx/Mdx";
 import { ArticleJsonLd } from "@/components/seo/JsonLd";
-import { TagRow } from "@/components/ui/Tag";
 import { formatDate, getNote, getNotes, isoDate } from "@/lib/content";
 import { absoluteUrl } from "@/lib/site";
 
@@ -20,7 +19,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!note) return {};
 
   const path = `/notes/${note.slug}`;
-  const og = `/api/og?title=${encodeURIComponent(note.title)}&eyebrow=Note&accent=violet`;
+  const og = `/api/og?title=${encodeURIComponent(note.title)}&eyebrow=Note`;
 
   return {
     title: note.title,
@@ -58,28 +57,17 @@ export default async function NotePage({ params }: Params) {
         path={`/notes/${note.slug}`}
         tags={note.tags}
       />
-      <OverlayShell
-        station="notes"
-        eyebrow="Note"
-        title={note.title}
-        width="narrow"
-        intro={
-          <div className="space-y-4">
-            <p>{note.summary}</p>
-            <div className="flex flex-wrap items-center gap-3">
-              <p className="arcade-label text-[0.5rem] text-phosphor-dim/70">
-                <time dateTime={note.date.toISOString()}>
-                  {formatDate(note.date)}
-                </time>{" "}
-                &middot; {note.readingMinutes} min read
-              </p>
-              <TagRow tags={note.tags} />
-            </div>
-          </div>
-        }
-      >
+      <WindowFrame title={note.title} icon="/desktop/icons/notes.svg" width={600}>
+        <p className="os-kicker">Note</p>
+        <h1>{note.title}</h1>
+        <p>{note.summary}</p>
+        <p className="hint">
+          <time dateTime={note.date.toISOString()}>{formatDate(note.date)}</time>{" "}
+          · {note.readingMinutes} min
+          {note.tags.length ? ` · ${note.tags.join(", ")}` : ""}
+        </p>
         <Mdx source={note.body} />
-      </OverlayShell>
+      </WindowFrame>
     </>
   );
 }

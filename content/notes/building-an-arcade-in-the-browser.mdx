@@ -1,51 +1,35 @@
 ---
-title: "Building an arcade in the browser"
+title: "Building a desktop in the browser"
 date: 2026-09-28
-tags: [webgl, three.js, performance]
-summary: "Why this site is a room full of cabinets instead of a nav bar, and the three decisions that made it fast enough to ship."
+tags: [css, next.js, interface]
+summary: "Why this site is a computer desktop instead of a nav bar, and the three decisions that made it readable."
 draft: false
 ---
 
-The hard part of a 3D portfolio is not the 3D. It is making sure the 3D never
-gets in the way of the words. Three decisions carried most of that weight.
+The hard part of a personal site is not the metaphor. It is making sure the
+metaphor never gets in the way of the words. Three decisions carried most of
+that weight.
 
-## One canvas, never unmounted
+## One desktop, windows as routes
 
-The scene lives in the root layout, outside the routed children. Navigating
-does not tear down a WebGL context and rebuild it; it changes a target vector
-that the camera chases. Route changes become camera moves.
+The wallpaper and icons live in the root layout. Navigating does not rebuild
+the machine; it opens a window. Close it and you are still at the same desk,
+with the rain still falling.
 
 <Callout type="tip" title="The cheap version of this">
-If you only take one thing from this: put the canvas above the router, not
-inside it. Everything else follows from that.
+If you only take one thing from this: put the chrome around the router, not
+inside every page. Everything else follows from that.
 </Callout>
 
-## Content is DOM, not texture
+## Content is a document, not a card
 
-It is tempting to render text onto the cabinet screens with a render target.
-It looks incredible in a demo and is miserable to actually read. Selectable
-text, real scrolling, and working screen readers all come free if the content
-is a DOM layer and the 3D stays behind it.
+A window should feel like a notebook under a lamp, not a marketing section.
+Serif for the file, a soft UI face for the title bar, and a close box that
+actually goes home.
 
-The compromise is that the cabinet screens run an attract-mode shader instead
-of the real content. Five cabinets, five draw calls, zero render targets:
+## Graphics from elsewhere
 
-```glsl
-if (uVariant < 0.5) {
-  p = patternRings(vUv, t);
-} else if (uVariant < 1.5) {
-  p = patternBlocks(vUv, t);
-}
-```
-
-Branching on a uniform is coherent across the whole draw, so the cost is the
-branch taken, not the sum of all of them.
-
-## Tiers, not a toggle
-
-Device capability is guessed once from core count, memory, pointer type, and
-the GPU renderer string, then demoted at runtime if frames drop. <Score label="Hi"
-value="bloom + CA + scanlines" /> <Score label="Lo" value="emissive only" />
-
-The low tier has no post-processing at all. Emissive materials carry the neon
-look on their own, which turns out to be most of the effect anyway.
+I did not draw the icons. Tango already did, in 2005, and released them as
+public domain. The wallpaper is a rainy night in Chicago, photographed by
+Daniel Powell. Borrowing real pictures is how you stop a site from looking
+like it was generated yesterday.

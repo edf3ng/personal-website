@@ -13,11 +13,10 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#04040a",
-          color: "#ff2d95",
-          fontSize: 18,
+          background: "#c4784a",
+          color: "#f3e6d0",
+          fontSize: 16,
           fontWeight: 700,
-          letterSpacing: -1,
         }}
       >
         EF

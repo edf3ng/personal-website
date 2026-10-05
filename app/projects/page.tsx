@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
-import { OverlayShell } from "@/components/overlay/OverlayShell";
-import { ProjectCard } from "@/components/ui/ProjectCard";
-import { getProjects } from "@/lib/content";
+import { WindowFrame } from "@/components/desktop/WindowFrame";
+import { formatDate, getProjects } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Projects",
-  description:
-    "Things I have built and shipped, with write-ups on how they went.",
+  description: "Things I have built and shipped, with write-ups on how they went.",
   alternates: { canonical: "/projects" },
 };
 
@@ -15,29 +14,29 @@ export default function ProjectsPage() {
   const projects = getProjects();
 
   return (
-    <OverlayShell
-      station="projects"
-      title="Projects"
-      intro={
-        <p>
-          Selected work, with notes on what it does and how it was built.
-        </p>
-      }
-    >
+    <WindowFrame title="Projects" icon="/desktop/icons/folder.svg" width={560}>
+      <p className="os-kicker">Folder</p>
+      <h1>Projects</h1>
+      <p>Files on this desk. Open one and it comes up in a window.</p>
       {projects.length === 0 ? (
-        <p className="text-sm text-phosphor-dim">
-          The rack is empty. Drop an <code>.mdx</code> file in{" "}
-          <code>content/projects/</code> to load a cartridge.
-        </p>
+        <p>This folder is empty.</p>
       ) : (
-        <ul className="grid gap-5 sm:grid-cols-2">
+        <ul className="file-list">
           {projects.map((project) => (
-            <li key={project.slug} className="h-full">
-              <ProjectCard project={project} />
+            <li key={project.slug}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/desktop/icons/document.svg" alt="" />
+              <div>
+                <Link href={`/projects/${project.slug}`}>{project.title}</Link>
+                <p className="file-meta">
+                  {project.status} · {formatDate(project.date)}
+                </p>
+                <p className="file-summary">{project.summary}</p>
+              </div>
             </li>
           ))}
         </ul>
       )}
-    </OverlayShell>
+    </WindowFrame>
   );
 }

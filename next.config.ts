@@ -7,11 +7,6 @@ const withBundleAnalyzer = bundleAnalyzer({
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  // three.js and drei ship untranspiled ESM that Next needs to process.
-  transpilePackages: ["three"],
-  experimental: {
-    optimizePackageImports: ["@react-three/drei"],
-  },
 };
 
 export default withBundleAnalyzer(nextConfig);

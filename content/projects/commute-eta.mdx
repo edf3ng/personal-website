@@ -1,0 +1,27 @@
+---
+title: "Commute ETA Error Model"
+date: 2026-07-01
+tags: [Python, PyTorch, NumPy, Flask]
+summary: "Modeled residual error in a routing provider’s ETA forecasts, cutting mean absolute error 36% under walk-forward validation."
+status: shipped
+featured: true
+badge: "ETA"
+draft: false
+---
+
+Routing apps are confident. Their ETAs are not. This project treats the
+provider’s forecast as a first guess and models the leftover error.
+
+## What it does
+
+I engineered leak-resistant time-series features and trained a residual
+model in PyTorch. Walk-forward validation cut mean absolute error 36%
+against the raw provider times.
+
+Split-conformal calibration sits on top of the point estimate, so the
+system can output an on-time probability instead of a single minute.
+
+## Stack
+
+Python, PyTorch, NumPy, Flask. The service is a small API around the
+calibrated residual, not a dashboard pretending to be research.

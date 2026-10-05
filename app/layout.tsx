@@ -1,14 +1,10 @@
 import type { Metadata, Viewport } from "next";
 
 import "./globals.css";
-import { sansFont, monoFont } from "@/lib/fonts";
-import { site } from "@/lib/site";
-import { ArcadeCanvas } from "@/components/three/ArcadeCanvas";
-import { AudioBridge } from "@/components/overlay/AudioBridge";
-import { HudNav } from "@/components/overlay/HudNav";
-import { RouteSync } from "@/components/overlay/RouteSync";
-import { SystemBar } from "@/components/overlay/SystemBar";
+import { Desktop } from "@/components/desktop/Desktop";
 import { PersonJsonLd } from "@/components/seo/JsonLd";
+import { docFont, monoFont, uiFont } from "@/lib/fonts";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -42,7 +38,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#04040a",
+  themeColor: "#1a202c",
   colorScheme: "dark",
 };
 
@@ -54,30 +50,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${sansFont.variable} ${monoFont.variable} ${sansFont.className}`}
+      className={`${uiFont.variable} ${docFont.variable} ${monoFont.variable} ${uiFont.className}`}
       suppressHydrationWarning
     >
-      <body className="min-h-dvh antialiased">
+      <body>
         <a
           href="#content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:text-void"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-white focus:px-3 focus:py-2"
         >
           Skip to content
         </a>
-
-        {/* The scene lives outside the routed children so navigation is a
-            camera move rather than a teardown and rebuild. */}
-        <ArcadeCanvas />
-
-        {/* Mounted above `main` on purpose: its effect writes the route into
-            the store before any page's effects read `isTransitioning`. */}
-        <RouteSync />
-        <AudioBridge />
-
-        <HudNav />
-        <main id="content">{children}</main>
-        <SystemBar />
-
+        <Desktop>
+          <main id="content">{children}</main>
+        </Desktop>
         <PersonJsonLd />
       </body>
     </html>

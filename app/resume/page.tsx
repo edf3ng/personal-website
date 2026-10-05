@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { OverlayShell } from "@/components/overlay/OverlayShell";
+import { WindowFrame } from "@/components/desktop/WindowFrame";
 import { PrintButton } from "@/components/ui/PrintButton";
 import { resume, type ResumeEntry } from "@/content/resume";
 import { site } from "@/lib/site";
@@ -13,123 +13,83 @@ export const metadata: Metadata = {
 
 function EntryList({ entries }: { entries: readonly ResumeEntry[] }) {
   return (
-    <ol className="space-y-9">
+    <div>
       {entries.map((entry) => (
-        <li key={`${entry.org}-${entry.role}`}>
-          <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-            <h3 className="text-lg font-medium tracking-tight text-ink">
-              {entry.role}
-            </h3>
-            <p className="arcade-label text-[0.5rem] text-phosphor-dim">
-              {entry.start} &ndash; {entry.end}
+        <article key={`${entry.org}-${entry.role}`} className="job">
+          <div className="job-head">
+            <h3>{entry.role}</h3>
+            <p className="job-dates">
+              {entry.start ? `${entry.start} – ${entry.end}` : entry.end}
             </p>
           </div>
-          <p className="mt-1.5 text-sm text-[var(--accent)]">
+          <p className="job-org">
             {entry.url ? (
-              <a
-                href={entry.url}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="underline underline-offset-4"
-              >
+              <a href={entry.url} target="_blank" rel="noreferrer noopener">
                 {entry.org}
               </a>
             ) : (
               entry.org
             )}
-            {entry.location ? (
-              <span className="text-phosphor-dim"> &middot; {entry.location}</span>
-            ) : null}
+            {entry.location ? ` · ${entry.location}` : null}
           </p>
-          <ul className="mt-3.5 space-y-2">
+          <ul>
             {entry.points.map((point) => (
-              <li
-                key={point}
-                className="relative pl-5 text-sm leading-relaxed text-phosphor/85 before:absolute before:left-0 before:text-[var(--accent)] before:content-['\25B8']"
-              >
-                {point}
-              </li>
+              <li key={point}>{point}</li>
             ))}
           </ul>
-        </li>
+        </article>
       ))}
-    </ol>
-  );
-}
-
-function Section({
-  id,
-  title,
-  children,
-}: {
-  id: string;
-  title: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <section aria-labelledby={id} className="mt-14 first:mt-0">
-      <h2
-        id={id}
-        className="arcade-label mb-6 border-b border-[rgb(var(--accent-rgb)/0.25)] pb-2.5 text-[0.6rem] text-[var(--accent)]"
-      >
-        {title}
-      </h2>
-      {children}
-    </section>
+    </div>
   );
 }
 
 export default function ResumePage() {
   return (
-    <OverlayShell
-      station="resume"
-      title={`${site.name} — ${resume.headline}`}
-      intro={
-        <div className="space-y-5">
-          <p>{resume.summary}</p>
-          <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
-            {resume.contact.map((item) => (
-              <li key={item.label}>
-                <span className="arcade-label mr-2 text-[0.45rem] text-phosphor-dim">
-                  {item.label}
-                </span>
-                <a
-                  href={item.href}
-                  className="text-[var(--accent)] underline underline-offset-4"
-                >
-                  {item.value}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      }
+    <WindowFrame
+      title="Resume"
+      icon="/desktop/icons/resume.svg"
+      width={620}
       actions={<PrintButton />}
     >
       <div className="print-plain">
-        <Section id="experience" title="Experience">
-          <EntryList entries={resume.experience} />
-        </Section>
+        <p className="os-kicker">Resume</p>
+        <h1>{resume.headline}</h1>
+        <p>{resume.summary}</p>
+        <ul className="contact-row">
+          {resume.contact.map((item) => (
+            <li key={item.label}>
+              <a href={item.href}>{item.value}</a>
+            </li>
+          ))}
+        </ul>
 
-        <Section id="education" title="Education">
-          <EntryList entries={resume.education} />
-        </Section>
+        <h2>Experience</h2>
+        <EntryList entries={resume.experience} />
 
-        <Section id="skills" title="Skills">
-          <dl className="grid gap-5 sm:grid-cols-2">
-            {resume.skills.map((group) => (
-              <div key={group.group}>
-                <dt className="arcade-label text-[0.5rem] text-phosphor-dim">
-                  {group.group}
-                </dt>
-                <dd className="mt-2 text-sm leading-relaxed text-phosphor/85">
-                  {group.items.join(" \u00B7 ")}
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </Section>
+        {resume.education.length > 0 ? (
+          <>
+            <h2>Education</h2>
+            <EntryList entries={resume.education} />
+          </>
+        ) : null}
+
+        <h2>Honors</h2>
+        <ul className="honor-list">
+          {resume.honors.map((honor) => (
+            <li key={honor.title}>
+              <span className="job-dates">{honor.date}</span>
+              <span>{honor.title}</span>
+            </li>
+          ))}
+        </ul>
+
+        <h2>Skills</h2>
+        {resume.skills.map((group) => (
+          <p key={group.group}>
+            <strong>{group.group}.</strong> {group.items.join(", ")}
+          </p>
+        ))}
       </div>
-    </OverlayShell>
+    </WindowFrame>
   );
 }

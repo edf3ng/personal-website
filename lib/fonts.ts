@@ -1,13 +1,23 @@
-import { Geist, IBM_Plex_Mono } from "next/font/google";
+import { Inconsolata, Lora, Nunito } from "next/font/google";
 
-export const sansFont = Geist({
+/** Soft UI chrome — rounded, cafe-like, not the previous screen face. */
+export const uiFont = Nunito({
+  weight: ["400", "600", "700"],
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-sans-loaded",
+  variable: "--font-ui",
 });
 
-export const monoFont = IBM_Plex_Mono({
-  weight: ["400", "500"],
+/** Window documents, like a notebook under a lamp. */
+export const docFont = Lora({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-doc",
+});
+
+/** Code in notes. */
+export const monoFont = Inconsolata({
+  weight: ["400", "700"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-mono-loaded",

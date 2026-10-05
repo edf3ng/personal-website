@@ -1,15 +1,18 @@
 import type { MetadataRoute } from "next";
 
 import { getNotes, getProjects } from "@/lib/content";
+import { DESKTOP_ITEMS } from "@/lib/desktop";
 import { absoluteUrl } from "@/lib/site";
-import { STATION_LIST } from "@/lib/stations";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const stations = STATION_LIST.map((station) => ({
-    url: absoluteUrl(station.path),
+  const pages = [
+    { path: "/", priority: 1 },
+    ...DESKTOP_ITEMS.map((item) => ({ path: item.href, priority: 0.8 })),
+  ].map((page) => ({
+    url: absoluteUrl(page.path),
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
-    priority: station.path === "/" ? 1 : 0.8,
+    priority: page.priority,
   }));
 
   const notes = getNotes().map((note) => ({
@@ -26,5 +29,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...stations, ...projects, ...notes];
+  return [...pages, ...projects, ...notes];
 }

@@ -8,25 +8,23 @@ import remarkGfm from "remark-gfm";
 import { mdxComponents } from "./mdx-components";
 
 const prettyCode: PrettyCodeOptions = {
-  theme: "synthwave-84",
+  theme: "min-light",
   keepBackground: false,
   defaultLang: { block: "text", inline: "text" },
 };
 
 export function Mdx({ source }: { source: string }) {
   return (
-    <div className="text-base">
-      <MDXRemote
-        source={source}
-        components={mdxComponents}
-        options={{
-          parseFrontmatter: false,
-          mdxOptions: {
-            remarkPlugins: [remarkGfm],
-            rehypePlugins: [rehypeSlug, [rehypePrettyCode, prettyCode]],
-          },
-        }}
-      />
-    </div>
+    <MDXRemote
+      source={source}
+      components={mdxComponents}
+      options={{
+        parseFrontmatter: false,
+        mdxOptions: {
+          remarkPlugins: [remarkGfm],
+          rehypePlugins: [rehypeSlug, [rehypePrettyCode, prettyCode]],
+        },
+      }}
+    />
   );
 }
