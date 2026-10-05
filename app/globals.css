@@ -1,131 +1,45 @@
 @import "tailwindcss";
 
-/* ------------------------------------------------------------------ */
-/* Design tokens                                                      */
-/* ------------------------------------------------------------------ */
-
 @theme {
-  --color-void: #04040a;
-  --color-void-soft: #0a0a16;
-  --color-carpet: #140b2e;
-  --color-haze: #1b1033;
+  --color-void: #07070c;
+  --color-void-soft: #101018;
 
-  --color-neon-pink: #ff2d95;
-  --color-neon-cyan: #00e5ff;
-  --color-neon-amber: #ffd400;
-  --color-neon-green: #39ff14;
-  --color-neon-violet: #b06bff;
+  --color-neon-pink: #ff4d9a;
+  --color-neon-cyan: #3ad4ff;
+  --color-neon-amber: #f5c14a;
+  --color-neon-green: #5ee07a;
+  --color-neon-violet: #b07cff;
 
-  --color-phosphor: #d8fff0;
-  --color-phosphor-dim: #7fa89c;
+  --color-ink: #f0f1f5;
+  --color-ink-dim: #8b8d99;
+  --color-phosphor: #f0f1f5;
+  --color-phosphor-dim: #8b8d99;
 
-  --font-display: var(--font-pixel), "Courier New", monospace;
-  --font-mono: var(--font-term), ui-monospace, "SF Mono", Menlo, monospace;
+  --font-sans: var(--font-sans-loaded), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sans-loaded), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-loaded), ui-monospace, "SF Mono", Menlo, monospace;
 
-  --radius-cab: 0.25rem;
-
-  --animate-blink: blink 1.06s steps(2, start) infinite;
-  --animate-flicker: flicker 4.2s infinite;
-  --animate-scanroll: scanroll 8s linear infinite;
-  --animate-marquee: marquee 18s linear infinite;
-  --animate-power-on: power-on 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-fade-in: fade-in 0.4s ease both;
 }
 
-/* ------------------------------------------------------------------ */
-/* Runtime CSS variables                                              */
-/* `--accent` is rewritten per route by OverlayShell so every piece of */
-/* CRT chrome retints together.                                        */
-/* ------------------------------------------------------------------ */
-
 :root {
-  --accent: #ff2d95;
-  --accent-rgb: 255 45 149;
-  --scanline-opacity: 0.16;
-  --scanline-size: 3px;
-  --crt-glow: 0 0 2px rgb(var(--accent-rgb) / 0.9), 0 0 14px
-    rgb(var(--accent-rgb) / 0.45);
-  --overlay-bg: rgb(4 4 10 / 0.82);
+  --accent: #ff4d9a;
+  --accent-rgb: 255 77 154;
+  --scanline-opacity: 0;
+  --crt-glow: none;
   color-scheme: dark;
 }
 
-@keyframes blink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-
-@keyframes flicker {
-  0%,
-  96%,
-  100% {
-    opacity: 1;
-  }
-  97% {
-    opacity: 0.82;
-  }
-  98% {
-    opacity: 1;
-  }
-  98.5% {
-    opacity: 0.9;
-  }
-}
-
-@keyframes scanroll {
+@keyframes fade-in {
   from {
-    background-position-y: 0;
+    opacity: 0;
+    transform: translateY(8px);
   }
   to {
-    background-position-y: 100vh;
-  }
-}
-
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes power-on {
-  0% {
-    opacity: 0;
-    transform: scaleY(0.004) scaleX(0.7);
-    filter: brightness(6);
-  }
-  45% {
     opacity: 1;
-    transform: scaleY(0.02) scaleX(1);
-    filter: brightness(3);
-  }
-  100% {
-    opacity: 1;
-    transform: scaleY(1) scaleX(1);
-    filter: brightness(1);
+    transform: none;
   }
 }
-
-@keyframes power-off {
-  0% {
-    opacity: 1;
-    transform: scaleY(1);
-  }
-  100% {
-    opacity: 0;
-    transform: scaleY(0.004);
-    filter: brightness(5);
-  }
-}
-
-/* ------------------------------------------------------------------ */
-/* Base                                                               */
-/* ------------------------------------------------------------------ */
 
 html {
   scroll-behavior: smooth;
@@ -133,14 +47,14 @@ html {
 
 body {
   background-color: var(--color-void);
-  color: var(--color-phosphor);
-  font-family: var(--font-mono);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
 ::selection {
-  background: rgb(var(--accent-rgb) / 0.35);
+  background: rgb(var(--accent-rgb) / 0.28);
   color: #fff;
 }
 
@@ -149,52 +63,29 @@ body {
   outline-offset: 3px;
 }
 
-/* Thin arcade scrollbar inside CRT panels. */
 .crt-scroll {
   scrollbar-width: thin;
-  scrollbar-color: rgb(var(--accent-rgb) / 0.5) transparent;
+  scrollbar-color: rgb(255 255 255 / 0.25) transparent;
 }
 .crt-scroll::-webkit-scrollbar {
   width: 8px;
 }
 .crt-scroll::-webkit-scrollbar-thumb {
-  background: rgb(var(--accent-rgb) / 0.45);
+  background: rgb(255 255 255 / 0.2);
   border-radius: 99px;
 }
-.crt-scroll::-webkit-scrollbar-track {
-  background: transparent;
-}
 
-/* ------------------------------------------------------------------ */
-/* CRT utilities                                                      */
-/* ------------------------------------------------------------------ */
-
-@utility text-glow {
-  text-shadow: var(--crt-glow);
-}
-
-@utility text-rgb-split {
-  text-shadow:
-    -0.4px 0 rgb(255 0 90 / 0.28),
-    0.4px 0 rgb(0 220 255 / 0.24);
-}
-
-@utility box-glow {
-  box-shadow:
-    0 0 0 1px rgb(var(--accent-rgb) / 0.45),
-    0 0 18px -4px rgb(var(--accent-rgb) / 0.55),
-    inset 0 0 28px -18px rgb(var(--accent-rgb) / 0.9);
+@utility label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
 }
 
 @utility arcade-label {
-  font-family: var(--font-display);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
 }
-
-/* ------------------------------------------------------------------ */
-/* Motion + capability preferences                                    */
-/* ------------------------------------------------------------------ */
 
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -207,20 +98,9 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-  .scanlines::after {
-    animation: none !important;
-  }
 }
 
-/* ------------------------------------------------------------------ */
-/* Print: strip every bit of arcade chrome from the resume            */
-/* ------------------------------------------------------------------ */
-
 @media print {
-  :root {
-    --scanline-opacity: 0;
-    --crt-glow: none;
-  }
   body {
     background: #fff !important;
     color: #000 !important;

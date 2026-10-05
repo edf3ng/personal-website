@@ -72,7 +72,7 @@ export function Score({ label, value }: { label: string; value: string }) {
       <span className="arcade-label text-[0.5rem] text-phosphor-dim">
         {label}
       </span>
-      <span className="font-display text-xs text-[var(--accent)] text-glow">
+      <span className="text-sm font-medium text-[var(--accent)]">
         {value}
       </span>
     </span>
@@ -91,13 +91,13 @@ export const mdxComponents = {
   a: Anchor,
   h2: (props: El<"h2">) => (
     <h2
-      className="mt-12 scroll-mt-28 border-b border-white/10 pb-3 font-display text-base leading-relaxed text-phosphor first:mt-0"
+      className="mt-12 scroll-mt-28 border-b border-white/10 pb-3 text-2xl font-medium tracking-tight text-ink first:mt-0"
       {...props}
     />
   ),
   h3: (props: El<"h3">) => (
     <h3
-      className="mt-9 scroll-mt-28 font-display text-[0.8rem] leading-relaxed text-[var(--accent)]"
+      className="mt-9 scroll-mt-28 text-lg font-medium tracking-tight text-ink"
       {...props}
     />
   ),

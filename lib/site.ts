@@ -1,10 +1,9 @@
 export const site = {
   name: "Edwin Feng",
   handle: "edwinfeng",
-  title: "Edwin Feng — Arcade",
-  tagline: "Engineer. Builder. Occasional writer.",
+  title: "Edwin Feng",
   description:
-    "The personal site of Edwin Feng, laid out as a 3D arcade. Projects, notes, resume, and the story behind them.",
+    "The personal site of Edwin Feng — projects, notes, and a resume, set in a 3D arcade.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://edwinfeng.dev",
   locale: "en_US",
   email: "hello@edwinfeng.dev",

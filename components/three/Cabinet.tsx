@@ -24,7 +24,7 @@ const BUTTON_LAYOUT: [number, number][] = [
   [0.21, -0.05],
 ];
 
-let sharedMaterials: {
+let sharedCabinetMaterials: {
   body: THREE.MeshStandardMaterial;
   panel: THREE.MeshStandardMaterial;
   metal: THREE.MeshStandardMaterial;
@@ -33,29 +33,29 @@ let sharedMaterials: {
 
 /** The structural materials are identical across cabinets, so build them once. */
 function getSharedMaterials() {
-  sharedMaterials ??= {
+  sharedCabinetMaterials ??= {
     body: new THREE.MeshStandardMaterial({
-      color: "#0d0d18",
-      roughness: 0.52,
-      metalness: 0.22,
+      color: "#3a3848",
+      roughness: 0.48,
+      metalness: 0.18,
     }),
     panel: new THREE.MeshStandardMaterial({
-      color: "#15152a",
-      roughness: 0.34,
-      metalness: 0.1,
+      color: "#2a2836",
+      roughness: 0.38,
+      metalness: 0.12,
     }),
     metal: new THREE.MeshStandardMaterial({
-      color: "#2a2a3a",
-      roughness: 0.3,
-      metalness: 0.8,
+      color: "#6a6a78",
+      roughness: 0.28,
+      metalness: 0.72,
     }),
     stick: new THREE.MeshStandardMaterial({
-      color: "#1a1a24",
+      color: "#1f1e28",
       roughness: 0.4,
-      metalness: 0.6,
+      metalness: 0.55,
     }),
   };
-  return sharedMaterials;
+  return sharedCabinetMaterials;
 }
 
 type CabinetProps = {
@@ -137,7 +137,7 @@ export function Cabinet({ station, live, glowPlane }: CabinetProps) {
       ctx.strokeRect(10, 10, w - 20, h - 20);
       ctx.globalAlpha = 1;
 
-      ctx.font = `44px ${cssFontFamily("--font-pixel", '"Courier New", monospace')}`;
+      ctx.font = `600 42px ${cssFontFamily("--font-sans-loaded", "system-ui, sans-serif")}`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.shadowColor = station.accent;
@@ -157,11 +157,11 @@ export function Cabinet({ station, live, glowPlane }: CabinetProps) {
       ctx.textBaseline = "middle";
       ctx.fillStyle = "#ffffff";
 
-      ctx.font = `36px ${cssFontFamily("--font-pixel", '"Courier New", monospace')}`;
-      drawTracked(ctx, station.label.toUpperCase(), w / 2, h * 0.36, 5);
+      ctx.font = `600 34px ${cssFontFamily("--font-sans-loaded", "system-ui, sans-serif")}`;
+      drawTracked(ctx, station.label, w / 2, h * 0.36, 2);
 
-      ctx.font = `16px ${cssFontFamily("--font-pixel", '"Courier New", monospace')}`;
-      drawTracked(ctx, "PRESS START", w / 2, h * 0.62, 3);
+      ctx.font = `400 18px ${cssFontFamily("--font-sans-loaded", "system-ui, sans-serif")}`;
+      drawTracked(ctx, "Open", w / 2, h * 0.62, 1);
     },
     [station.label],
   );
@@ -178,13 +178,13 @@ export function Cabinet({ station, live, glowPlane }: CabinetProps) {
       ctx.lineWidth = 3;
       ctx.stroke();
 
-      ctx.font = `26px ${cssFontFamily("--font-pixel", '"Courier New", monospace')}`;
+      ctx.font = `600 28px ${cssFontFamily("--font-sans-loaded", "system-ui, sans-serif")}`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.fillStyle = station.accent;
       ctx.shadowColor = station.accent;
       ctx.shadowBlur = 18;
-      drawTracked(ctx, station.label.toUpperCase(), w / 2, h / 2, 5);
+      drawTracked(ctx, station.label, w / 2, h / 2, 1);
       ctx.shadowBlur = 0;
     },
     [station.label, station.accent],

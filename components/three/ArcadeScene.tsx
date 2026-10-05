@@ -28,7 +28,7 @@ export default function ArcadeScene() {
   return (
     <>
       <color attach="background" args={["#04040a"]} />
-      <fog attach="fog" args={["#07040f", 16, 42]} />
+      <fog attach="fog" args={["#0a0a12", 22, 48]} />
 
       <CameraRig />
       <ArcadeRoom />
@@ -38,7 +38,7 @@ export default function ArcadeScene() {
       <PerformanceMonitor
         onDecline={() => useArcadeStore.getState().regressQuality()}
       />
-      <AdaptiveDpr pixelated />
+      <AdaptiveDpr />
       <AdaptiveEvents />
       {quality.bakeShadows && <BakeShadows />}
       <Preload all />

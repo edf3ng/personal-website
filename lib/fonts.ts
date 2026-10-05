@@ -1,16 +1,14 @@
-import { Press_Start_2P, JetBrains_Mono } from "next/font/google";
+import { Geist, IBM_Plex_Mono } from "next/font/google";
 
-export const pixelFont = Press_Start_2P({
-  weight: "400",
+export const sansFont = Geist({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-pixel",
-  fallback: ["Courier New", "monospace"],
+  variable: "--font-sans-loaded",
 });
 
-export const termFont = JetBrains_Mono({
+export const monoFont = IBM_Plex_Mono({
+  weight: ["400", "500"],
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-term",
-  fallback: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
+  variable: "--font-mono-loaded",
 });

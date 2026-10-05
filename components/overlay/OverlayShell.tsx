@@ -8,7 +8,6 @@ import { CrtFrame } from "./CrtFrame";
 import { useArcadeStore } from "@/lib/store";
 import { STATIONS, type StationId } from "@/lib/stations";
 
-/** Never leave content hidden longer than this, whatever the camera is doing. */
 const MAX_WAIT_MS = 1100;
 
 type OverlayShellProps = {
@@ -18,7 +17,6 @@ type OverlayShellProps = {
   intro?: React.ReactNode;
   children: React.ReactNode;
   width?: "narrow" | "wide";
-  /** Shown top-right inside the frame, e.g. a resume download button. */
   actions?: React.ReactNode;
 };
 
@@ -60,26 +58,28 @@ export function OverlayShell({
       className={`mx-auto w-full px-4 pb-28 pt-24 sm:px-6 sm:pt-28 ${
         width === "narrow" ? "max-w-3xl" : "max-w-5xl"
       }`}
-      style={{ ["--accent" as string]: meta.accent, ["--accent-rgb" as string]: meta.accentRgb }}
+      style={
+        {
+          ["--accent" as string]: meta.accent,
+          ["--accent-rgb" as string]: meta.accentRgb,
+        } as React.CSSProperties
+      }
     >
       <div
         aria-busy={!ready}
-        className={ready ? "animate-power-on origin-center" : "opacity-0"}
+        className={ready ? "animate-fade-in" : "opacity-0"}
       >
         <CrtFrame>
-          <div className="px-5 py-7 sm:px-9 sm:py-10">
-            <header className="mb-8 border-b border-[rgb(var(--accent-rgb)/0.25)] pb-6">
+          <div className="px-6 py-8 sm:px-10 sm:py-11">
+            <header className="mb-8 border-b border-white/10 pb-6">
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div>
-                  <p className="arcade-label text-[0.6rem] text-[var(--accent)] text-glow">
-                    {eyebrow ?? meta.marquee}
+                  <p className="label text-ink-dim">
+                    {eyebrow ?? meta.label}
                   </p>
-                  <h1 className="mt-3 font-display text-xl leading-relaxed text-phosphor text-rgb-split sm:text-2xl">
+                  <h1 className="mt-2 text-3xl font-medium tracking-tight text-ink sm:text-4xl">
                     {title}
                   </h1>
-                  <p className="mt-3 text-sm text-phosphor-dim">
-                    {meta.tagline}
-                  </p>
                 </div>
                 {actions ? (
                   <div className="no-print flex shrink-0 gap-3">{actions}</div>
@@ -88,7 +88,7 @@ export function OverlayShell({
             </header>
 
             {intro ? (
-              <div className="mb-10 text-base leading-relaxed text-phosphor/90">
+              <div className="mb-10 text-[17px] leading-relaxed text-ink/85">
                 {intro}
               </div>
             ) : null}
@@ -98,10 +98,10 @@ export function OverlayShell({
             <footer className="no-print mt-14 border-t border-white/10 pt-6">
               <Link
                 href="/"
-                className="arcade-label inline-flex items-center gap-2 text-[0.6rem] text-phosphor-dim transition-colors hover:text-[var(--accent)]"
+                className="inline-flex items-center gap-2 text-sm text-ink-dim transition-colors hover:text-ink"
               >
-                <span aria-hidden="true">&lt;</span> Back to the arcade
-                <span className="ml-2 rounded border border-white/15 px-1.5 py-0.5 text-[0.5rem] text-phosphor-dim">
+                Back to the room
+                <span className="rounded border border-white/15 px-1.5 py-0.5 font-mono text-[10px]">
                   Esc
                 </span>
               </Link>

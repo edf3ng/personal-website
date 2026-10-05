@@ -10,7 +10,7 @@ export function PrintButton() {
     <button
       type="button"
       onClick={() => window.print()}
-      className="arcade-label rounded border border-[rgb(var(--accent-rgb)/0.5)] px-3 py-2 text-[0.5rem] text-[var(--accent)] transition-colors hover:bg-[rgb(var(--accent-rgb)/0.12)]"
+      className="rounded-md border border-white/15 px-3 py-2 text-sm text-ink transition-colors hover:bg-white/5"
     >
       Print / Save PDF
     </button>

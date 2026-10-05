@@ -10,7 +10,6 @@ import { NeonSign } from "./NeonSign";
 import { useCanvasTexture } from "./useCanvasTexture";
 import { useQualityPreset } from "@/lib/store";
 import { STATION_LIST } from "@/lib/stations";
-import { site } from "@/lib/site";
 
 export const ROOM = {
   width: 22,
@@ -90,7 +89,7 @@ function LightCone({
       <meshBasicMaterial
         color={color}
         transparent
-        opacity={0.045}
+        opacity={0.02}
         side={THREE.DoubleSide}
         blending={THREE.AdditiveBlending}
         depthWrite={false}
@@ -110,8 +109,8 @@ export function ArcadeRoom() {
       <mesh position={[0, ROOM.height / 2, 0]} receiveShadow>
         <boxGeometry args={[ROOM.width, ROOM.height, ROOM.depth]} />
         <meshStandardMaterial
-          color="#09060f"
-          roughness={0.95}
+          color="#16141f"
+          roughness={0.92}
           metalness={0}
           side={THREE.BackSide}
         />
@@ -141,73 +140,61 @@ export function ArcadeRoom() {
 
       {/* Neon on the back wall */}
       <NeonSign
-        text={site.name.toUpperCase()}
-        color="#ff2d95"
-        position={[0, 3.5, ROOM.backWallZ + 0.08]}
-        width={7.6}
-        fontSize={96}
-        flicker={9}
-      />
-      <NeonSign
-        text="ARCADE"
-        color="#00e5ff"
-        position={[0, 2.62, ROOM.backWallZ + 0.08]}
-        width={3.4}
-        fontSize={70}
-        tracking={22}
-      />
-      <NeonSign
-        text="OPEN 24H"
-        color="#39ff14"
+        text="OPEN LATE"
+        color="#7ad4ff"
         position={[-9.2, 2.4, -4]}
         rotation={[0, Math.PI / 2, 0]}
-        width={3.6}
-        fontSize={60}
-        tracking={10}
-        flicker={5.5}
+        width={3.2}
+        fontSize={56}
+        tracking={4}
+        flicker={0}
       />
       <NeonSign
         text="TOKENS"
-        color="#ffd400"
+        color="#f0c86a"
         position={[9.2, 2.4, -4]}
         rotation={[0, -Math.PI / 2, 0]}
-        width={3.2}
-        fontSize={60}
-        tracking={10}
+        width={2.8}
+        fontSize={56}
+        tracking={4}
       />
 
-      {/* Lighting */}
-      <ambientLight intensity={0.38} color="#6a5a9a" />
+      <ambientLight intensity={0.62} color="#c8c4d8" />
       <hemisphereLight
-        intensity={0.28}
-        color="#8aa4ff"
-        groundColor="#1a0e2e"
+        intensity={0.42}
+        color="#e8e4f4"
+        groundColor="#2a2438"
+      />
+      <directionalLight
+        position={[0.4, 3.4, 6]}
+        intensity={2.4}
+        color="#fff6ea"
       />
       <spotLight
-        position={[0, ROOM.height - 0.3, 1.2]}
-        angle={0.95}
-        penumbra={0.9}
-        distance={18}
-        decay={1.4}
-        intensity={34}
-        color="#c8d8ff"
+        position={[0, ROOM.height - 0.3, 2.2]}
+        angle={0.85}
+        penumbra={0.85}
+        distance={20}
+        decay={1.2}
+        intensity={38}
+        color="#f2f0ff"
         castShadow={quality.shadows}
         shadow-mapSize={[1024, 1024]}
         shadow-bias={-0.0012}
       />
       <pointLight
-        position={[-4.8, 3.2, -1.4]}
-        color="#ff2d95"
-        distance={14}
+        position={[-4.2, 2.6, 0.4]}
+        color="#ff9ac4"
+        distance={12}
         decay={2}
-        intensity={8}
+        intensity={4}
       />
       <pointLight
-        position={[4.8, 3.2, -1.4]}
-        color="#00e5ff"
-        distance={14}
+        position={[4.2, 2.6, 0.4]}
+        color="#8ad8ff"
+        distance={12}
         decay={2}
-        intensity={8}
+        intensity={4}
       />
 
       {quality.lightCones && (

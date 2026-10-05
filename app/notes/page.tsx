@@ -96,7 +96,7 @@ export default async function NotesPage({ searchParams }: Props) {
                 {note.draft ? " \u00B7 draft" : ""}
               </p>
 
-              <h2 className="mt-2 font-display text-[0.8rem] leading-relaxed text-phosphor transition-colors group-hover:text-[var(--accent)]">
+              <h2 className="mt-2 text-xl font-medium tracking-tight text-ink transition-colors group-hover:text-[var(--accent)]">
                 <Link href={`/notes/${note.slug}`}>{note.title}</Link>
               </h2>
 

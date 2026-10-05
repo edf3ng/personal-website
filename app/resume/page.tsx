@@ -17,7 +17,7 @@ function EntryList({ entries }: { entries: readonly ResumeEntry[] }) {
       {entries.map((entry) => (
         <li key={`${entry.org}-${entry.role}`}>
           <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-            <h3 className="font-display text-[0.75rem] leading-relaxed text-phosphor">
+            <h3 className="text-lg font-medium tracking-tight text-ink">
               {entry.role}
             </h3>
             <p className="arcade-label text-[0.5rem] text-phosphor-dim">

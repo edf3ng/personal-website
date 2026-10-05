@@ -3,20 +3,18 @@ import Link from "next/link";
 export default function NotFound() {
   return (
     <div className="mx-auto flex min-h-dvh max-w-xl flex-col items-center justify-center px-6 text-center">
-      <p className="arcade-label animate-blink text-[0.6rem] text-neon-pink text-glow">
-        Game over
-      </p>
-      <h1 className="mt-7 font-display text-2xl leading-relaxed text-phosphor text-rgb-split">
-        404
+      <p className="text-sm text-ink-dim">404</p>
+      <h1 className="mt-4 text-3xl font-medium tracking-tight text-ink">
+        Nothing here
       </h1>
-      <p className="mt-6 text-sm leading-relaxed text-phosphor-dim">
-        That cabinet is out of order. Nothing lives at this address.
+      <p className="mt-4 text-sm leading-relaxed text-ink-dim">
+        That address does not exist.
       </p>
       <Link
         href="/"
-        className="arcade-label mt-10 rounded border border-neon-pink/50 px-5 py-3 text-[0.55rem] text-neon-pink transition-colors hover:bg-neon-pink/10"
+        className="mt-10 text-sm text-ink underline underline-offset-4 hover:opacity-70"
       >
-        Continue? 9...
+        Back to the room
       </Link>
     </div>
   );

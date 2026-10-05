@@ -15,7 +15,6 @@ const TIER_LABEL: Record<QualityTier, string> = {
   high: "High",
 };
 
-/** Cabinet service panel: sound and graphics, bottom-right, always reachable. */
 export function SystemBar() {
   const audioEnabled = useArcadeStore((s) => s.audioEnabled);
   const quality = useArcadeStore((s) => s.quality);
@@ -53,14 +52,13 @@ export function SystemBar() {
   };
 
   return (
-    <div className="no-print fixed bottom-4 right-4 z-40 flex items-center gap-2">
+    <div className="no-print fixed bottom-5 right-5 z-40 flex items-center gap-4 text-[12px] text-ink-dim">
       <button
         type="button"
         onClick={onToggleAudio}
         aria-pressed={audioEnabled}
-        className="arcade-label rounded-full border border-white/12 bg-[rgb(4_4_10/0.75)] px-3 py-2 text-[0.5rem] text-phosphor-dim backdrop-blur-md transition-colors hover:text-[var(--accent)]"
+        className="transition-colors hover:text-ink"
       >
-        <span aria-hidden="true">{audioEnabled ? "\u266A" : "\u2715"}</span>{" "}
         Sound {audioEnabled ? "on" : "off"}
       </button>
 
@@ -73,10 +71,10 @@ export function SystemBar() {
               ? "Graphics quality (locked to your choice)"
               : "Graphics quality (auto-detected)"
           }
-          className="arcade-label rounded-full border border-white/12 bg-[rgb(4_4_10/0.75)] px-3 py-2 text-[0.5rem] text-phosphor-dim backdrop-blur-md transition-colors hover:text-[var(--accent)]"
+          className="transition-colors hover:text-ink"
         >
-          FX {TIER_LABEL[quality]}
-          {qualityLocked ? "" : " \u00B7 auto"}
+          Graphics {TIER_LABEL[quality]}
+          {qualityLocked ? "" : ""}
         </button>
       )}
     </div>

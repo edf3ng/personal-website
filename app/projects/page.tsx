@@ -20,8 +20,7 @@ export default function ProjectsPage() {
       title="Projects"
       intro={
         <p>
-          A rack of cartridges. Each one has a write-up covering what it does,
-          what it cost to build, and what I would change.
+          Selected work, with notes on what it does and how it was built.
         </p>
       }
     >

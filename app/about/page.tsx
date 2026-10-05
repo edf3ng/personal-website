@@ -6,7 +6,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About",
-  description: `About ${site.name}. ${site.tagline}`,
+  description: `About ${site.name}.`,
   alternates: { canonical: "/about" },
 };
 
@@ -43,12 +43,12 @@ export default function AboutPage() {
       title={`About ${site.name}`}
       intro={<p>{resume.summary}</p>}
     >
-      <section aria-labelledby="high-scores">
+      <section aria-labelledby="highlights">
         <h2
-          id="high-scores"
-          className="arcade-label mb-5 text-[0.6rem] text-[var(--accent)]"
+          id="highlights"
+          className="mb-5 text-sm font-medium text-ink-dim"
         >
-          High scores
+          Highlights
         </h2>
         <dl className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {resume.highlights.map((item) => (
@@ -59,7 +59,7 @@ export default function AboutPage() {
               <dt className="arcade-label text-[0.45rem] text-phosphor-dim">
                 {item.label}
               </dt>
-              <dd className="mt-2.5 font-display text-base text-[var(--accent)] text-glow">
+              <dd className="mt-2.5 text-2xl font-medium tracking-tight text-ink">
                 {item.value}
               </dd>
             </div>
@@ -70,9 +70,9 @@ export default function AboutPage() {
       <section aria-labelledby="story" className="mt-14">
         <h2
           id="story"
-          className="arcade-label mb-5 text-[0.6rem] text-[var(--accent)]"
+          className="mb-5 text-sm font-medium text-ink-dim"
         >
-          Continue
+          Background
         </h2>
         <div className="space-y-5 text-base leading-[1.85] text-phosphor/85">
           <p>
@@ -97,9 +97,9 @@ export default function AboutPage() {
       <section aria-labelledby="timeline" className="mt-14">
         <h2
           id="timeline"
-          className="arcade-label mb-5 text-[0.6rem] text-[var(--accent)]"
+          className="mb-5 text-sm font-medium text-ink-dim"
         >
-          Level select
+          Timeline
         </h2>
         <ol className="space-y-0">
           {TIMELINE.map((entry) => (
@@ -121,7 +121,7 @@ export default function AboutPage() {
       <section aria-labelledby="now" className="mt-14">
         <h2
           id="now"
-          className="arcade-label mb-5 text-[0.6rem] text-[var(--accent)]"
+          className="mb-5 text-sm font-medium text-ink-dim"
         >
           Currently
         </h2>
@@ -143,9 +143,9 @@ export default function AboutPage() {
       <section aria-labelledby="contact" className="mt-14">
         <h2
           id="contact"
-          className="arcade-label mb-5 text-[0.6rem] text-[var(--accent)]"
+          className="mb-5 text-sm font-medium text-ink-dim"
         >
-          Two player
+          Contact
         </h2>
         <p className="text-sm leading-relaxed text-phosphor-dim">
           The fastest way to reach me is{" "}

@@ -34,8 +34,8 @@ export function Effects() {
       {fx.bloom && (
         <Bloom
           mipmapBlur
-          intensity={0.9}
-          luminanceThreshold={0.38}
+          intensity={0.55}
+          luminanceThreshold={0.5}
           luminanceSmoothing={0.24}
           radius={0.72}
         />

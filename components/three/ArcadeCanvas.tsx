@@ -42,13 +42,8 @@ function Backdrop() {
 
 function LoadingScreen() {
   return (
-    <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-void/70">
-      <p className="arcade-label animate-blink text-[0.6rem] text-neon-pink text-glow">
-        Insert coin
-      </p>
-      <p className="arcade-label mt-5 text-[0.5rem] text-phosphor-dim">
-        Powering up cabinets&hellip;
-      </p>
+    <div className="absolute inset-0 z-10 flex items-center justify-center bg-void/60">
+      <p className="text-sm text-ink-dim">Loading the room…</p>
     </div>
   );
 }

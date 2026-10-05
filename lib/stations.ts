@@ -87,7 +87,7 @@ const SEEDS: StationSeed[] = [
     id: "about",
     path: "/about",
     label: "About",
-    marquee: "PLAYER ONE",
+    marquee: "About",
     tagline: "Who's behind the joystick",
     accent: "#ffd400",
     accentRgb: "255 212 0",
@@ -96,7 +96,7 @@ const SEEDS: StationSeed[] = [
     id: "projects",
     path: "/projects",
     label: "Projects",
-    marquee: "PROJECTS",
+    marquee: "Projects",
     tagline: "Things I built and shipped",
     accent: "#00e5ff",
     accentRgb: "0 229 255",
@@ -105,7 +105,7 @@ const SEEDS: StationSeed[] = [
     id: "home",
     path: "/",
     label: "Home",
-    marquee: "INSERT COIN",
+    marquee: "Home",
     tagline: "Press start",
     accent: "#ff2d95",
     accentRgb: "255 45 149",
@@ -114,7 +114,7 @@ const SEEDS: StationSeed[] = [
     id: "notes",
     path: "/notes",
     label: "Notes",
-    marquee: "NOTES",
+    marquee: "Notes",
     tagline: "Writing, half-finished thoughts, logs",
     accent: "#b06bff",
     accentRgb: "176 107 255",
@@ -123,7 +123,7 @@ const SEEDS: StationSeed[] = [
     id: "resume",
     path: "/resume",
     label: "Resume",
-    marquee: "HIGH SCORES",
+    marquee: "Resume",
     tagline: "The formal record",
     accent: "#39ff14",
     accentRgb: "57 255 20",
@@ -143,11 +143,11 @@ export const STATION_LIST: Station[] = STATION_ORDER.map((id) => STATIONS[id]);
 
 /** Pulled-back pose that frames the whole arc. */
 export const HUB_CAMERA: CameraPose = {
-  position: [0, 1.95, 3.55],
-  target: [0, 1.2, -2.4],
+  position: [0, 2.05, 4.6],
+  target: [0, 1.15, -2.1],
 };
 
-export const CAMERA_FOV = 46;
+export const CAMERA_FOV = 48;
 
 /**
  * Maps any pathname onto a station, so `/notes/some-slug` keeps the camera

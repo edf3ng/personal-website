@@ -16,7 +16,7 @@ export function ProjectCard({ project }: { project: Project }) {
       <div className="flex items-start justify-between gap-4">
         <span
           aria-hidden="true"
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded border border-[rgb(var(--accent-rgb)/0.4)] bg-[rgb(var(--accent-rgb)/0.08)] font-display text-[0.6rem] text-[var(--accent)]"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded border border-white/12 bg-white/5 text-sm font-medium text-ink"
         >
           {project.badge ?? project.title.slice(0, 2).toUpperCase()}
         </span>
@@ -28,7 +28,7 @@ export function ProjectCard({ project }: { project: Project }) {
         </span>
       </div>
 
-      <h2 className="mt-4 font-display text-[0.8rem] leading-relaxed text-phosphor">
+      <h2 className="mt-4 text-xl font-medium tracking-tight text-ink">
         <Link
           href={`/projects/${project.slug}`}
           className="before:absolute before:inset-0 before:content-[''] group-hover:text-[var(--accent)]"

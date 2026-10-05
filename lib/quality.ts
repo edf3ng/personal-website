@@ -32,10 +32,10 @@ export const QUALITY_PRESETS: Record<QualityTier, QualityPreset> = {
     lightCones: true,
     effects: {
       bloom: true,
-      chromaticAberration: true,
-      scanlines: true,
+      chromaticAberration: false,
+      scanlines: false,
       vignette: true,
-      noise: true,
+      noise: false,
     },
   },
   medium: {

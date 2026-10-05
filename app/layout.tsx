@@ -1,11 +1,10 @@
 import type { Metadata, Viewport } from "next";
 
 import "./globals.css";
-import { pixelFont, termFont } from "@/lib/fonts";
+import { sansFont, monoFont } from "@/lib/fonts";
 import { site } from "@/lib/site";
 import { ArcadeCanvas } from "@/components/three/ArcadeCanvas";
 import { AudioBridge } from "@/components/overlay/AudioBridge";
-import { CrtFilters } from "@/components/overlay/CrtFilters";
 import { HudNav } from "@/components/overlay/HudNav";
 import { RouteSync } from "@/components/overlay/RouteSync";
 import { SystemBar } from "@/components/overlay/SystemBar";
@@ -55,18 +54,16 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${pixelFont.variable} ${termFont.variable}`}
+      className={`${sansFont.variable} ${monoFont.variable} ${sansFont.className}`}
       suppressHydrationWarning
     >
       <body className="min-h-dvh antialiased">
         <a
           href="#content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-neon-pink focus:px-4 focus:py-2 focus:font-display focus:text-xs focus:text-void"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:text-void"
         >
           Skip to content
         </a>
-
-        <CrtFilters />
 
         {/* The scene lives outside the routed children so navigation is a
             camera move rather than a teardown and rebuild. */}

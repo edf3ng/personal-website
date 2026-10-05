@@ -42,19 +42,17 @@ export function NeonSign({
     1024,
     256,
     (ctx, w, h) => {
-      ctx.font = `${fontSize}px ${cssFontFamily("--font-pixel", '"Courier New", monospace')}`;
+      ctx.font = `600 ${fontSize}px ${cssFontFamily("--font-sans-loaded", "system-ui, sans-serif")}`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
 
       // Three passes: wide halo, tight halo, hot core.
       ctx.shadowColor = color;
       ctx.fillStyle = color;
-      ctx.shadowBlur = 56;
+      ctx.shadowBlur = 22;
       drawTracked(ctx, text, w / 2, h / 2, tracking);
-      ctx.shadowBlur = 24;
-      drawTracked(ctx, text, w / 2, h / 2, tracking);
-      ctx.shadowBlur = 14;
-      ctx.fillStyle = "#ffffff";
+      ctx.shadowBlur = 8;
+      ctx.fillStyle = "#fff8fb";
       drawTracked(ctx, text, w / 2, h / 2, tracking);
       ctx.shadowBlur = 0;
     },
